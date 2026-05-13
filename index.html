@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Home GP Quick Reference Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a2a4a;
+    --blue: #1565c0;
+    --blue-light: #1976d2;
+    --blue-pale: #e3f0fb;
+    --teal: #00796b;
+    --teal-light: #e0f2f1;
+    --red: #c62828;
+    --red-light: #ffebee;
+    --amber: #e65100;
+    --amber-light: #fff3e0;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --grey: #546e7a;
+    --grey-light: #f4f6f8;
+    --white: #ffffff;
+    --shadow: 0 2px 12px rgba(10,42,74,0.10);
+    --shadow-lg: 0 6px 32px rgba(10,42,74,0.16);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0f4fa;
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 18px 20px 14px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.25);
+  }
+  header h1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+  }
+  header p {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 2px;
+  }
+  .header-pill {
+    display: inline-block;
+    background: #c62828;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── EMERGENCY BANNER ── */
+  .emergency-bar {
+    background: #c62828;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+  .emergency-bar a { color: #ffcdd2; text-decoration: underline; }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--grey);
+    padding: 20px 16px 8px;
+  }
+
+  /* ── VITALS CARD (big tap target) ── */
+  .vitals-banner {
+    margin: 0 12px 6px;
+    background: var(--navy);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+  }
+  .vitals-banner-inner {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    gap: 16px;
+  }
+  .vitals-icon {
+    font-size: 2.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .vitals-banner-text h2 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+  .vitals-banner-text p {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.82rem;
+    margin-top: 2px;
+  }
+  .vitals-arrow {
+    margin-left: auto;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.4rem;
+  }
+
+  /* quick vitals strip */
+  .vitals-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .vstrip-item {
+    padding: 10px 6px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .vstrip-item:last-child { border-right: none; }
+  .vstrip-item:hover, .vstrip-item:active { background: rgba(255,255,255,0.08); }
+  .vstrip-item .vs-icon { font-size: 1.2rem; }
+  .vstrip-item .vs-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 700;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .vstrip-item .vs-val {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* ── CONCERN CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 12px;
+    margin-bottom: 6px;
+  }
+  .concern-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px 14px 14px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.14s, box-shadow 0.14s;
+    border-top: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .concern-card:hover, .concern-card:active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .concern-card .cc-icon { font-size: 2rem; margin-bottom: 6px; }
+  .concern-card h3 { font-size: 0.92rem; font-weight: 800; line-height: 1.25; }
+  .concern-card p { font-size: 0.72rem; color: var(--grey); margin-top: 3px; line-height: 1.4; }
+  .cc-arrow {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+
+  /* card accent colours */
+  .card-uti { border-top-color: #e65100; }
+  .card-conf { border-top-color: #7b1fa2; }
+  .card-legs { border-top-color: #1565c0; }
+  .card-urti { border-top-color: #00796b; }
+  .card-offlegs { border-top-color: #c62828; }
+  .card-falls { border-top-color: #f57f17; }
+  .card-chest { border-top-color: #ad1457; }
+  .card-skin { border-top-color: #558b2f; }
+  .card-constip { border-top-color: #6d4c41; }
+  .card-pain { border-top-color: #283593; }
+  .card-diabetes { border-top-color: #00695c; }
+  .card-mental { border-top-color: #4527a0; }
+  .card-eye { border-top-color: #0277bd; }
+  .card-nose { border-top-color: #37474f; }
+  .card-wound { border-top-color: #bf360c; }
+  .card-dehydration { border-top-color: #1565c0; }
+  .card-palliative { border-top-color: #4a148c; }
+  .card-medication { border-top-color: #33691e; }
+  .card-fit { border-top-color: #c62828; }
+  .card-diarrhoea { border-top-color: #6d4c41; }
+
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,42,74,0.55);
+    z-index: 200;
+    justify-content: center;
+    align-items: flex-end;
+    animation: fadeIn 0.2s;
+  }
+  .modal-overlay.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+    overflow-y: auto;
+    animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    padding-bottom: 30px;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+  .modal-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1;
+  }
+  .modal-header .mh-icon { font-size: 2rem; }
+  .modal-header h2 { font-size: 1.15rem; font-weight: 900; flex: 1; }
+  .modal-close {
+    background: #f0f4fa;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .modal-body { padding: 16px 20px; }
+
+  /* concern level badges */
+  .concern-level {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+  .level-red { background: #ffebee; color: #c62828; }
+  .level-amber { background: #fff3e0; color: #e65100; }
+  .level-green { background: #e8f5e9; color: #2e7d32; }
+
+  /* info sections */
+  .info-box {
+    background: var(--grey-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .info-box h4 {
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--grey);
+    margin-bottom: 8px;
+  }
+  .info-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .info-box ul li {
+    font-size: 0.88rem;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .info-box ul li::before {
+    content: '•';
+    position: absolute;
+    left: 6px;
+    color: var(--blue);
+    font-weight: 900;
+  }
+
+  .alert-box {
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border-left: 4px solid;
+  }
+  .alert-red { background: #ffebee; border-color: #c62828; }
+  .alert-amber { background: #fff3e0; border-color: #e65100; }
+  .alert-green { background: #e8f5e9; border-color: #2e7d32; }
+  .alert-blue { background: #e3f0fb; border-color: #1565c0; }
+
+  .alert-box h4 {
+    font-size: 0.82rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+  }
+  .alert-red h4 { color: #c62828; }
+  .alert-amber h4 { color: #e65100; }
+  .alert-green h4 { color: #2e7d32; }
+  .alert-blue h4 { color: #1565c0; }
+
+  .alert-box p, .alert-box ul {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .alert-box ul { list-style: none; }
+  .alert-box ul li { padding-left: 14px; position: relative; }
+  .alert-box ul li::before { content: '→'; position: absolute; left: 0; }
+
+  .nhs-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #003087;
+    color: white;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: opacity 0.15s;
+  }
+  .nhs-link:hover { opacity: 0.88; }
+  .nhs-logo {
+    background: white;
+    color: #003087;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* vitals detail modal */
+  .vital-detail-card {
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    border: 2px solid;
+  }
+  .vdc-bp { border-color: #1565c0; background: #e3f0fb; }
+  .vdc-temp { border-color: #e65100; background: #fff3e0; }
+  .vdc-pulse { border-color: #c62828; background: #ffebee; }
+  .vdc-spo2 { border-color: #2e7d32; background: #e8f5e9; }
+  .vdc-rr { border-color: #7b1fa2; background: #f3e5f5; }
+
+  .vdc-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .vdc-normal {
+    display: inline-block;
+    background: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .vdc-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 6px; }
+  .vdc-table th {
+    background: rgba(0,0,0,0.07);
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .vdc-table td { padding: 5px 8px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
+  .tag-concern { color: #c62828; font-weight: 700; }
+  .tag-call999 { color: #c62828; font-weight: 800; }
+
+  .divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 14px 0;
+  }
+
+  .step-list { counter-reset: steps; list-style: none; }
+  .step-list li {
+    counter-increment: steps;
+    padding-left: 36px;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 0.87rem;
+    line-height: 1.5;
+  }
+  .step-list li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 1px;
+  }
+
+  .phone-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--navy);
+    color: white;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--grey);
+    padding: 16px 20px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 10px;
+  }
+
+  .search-bar {
+    margin: 10px 12px 4px;
+    position: relative;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 11px 16px 11px 42px;
+    border: 2px solid #dce4ef;
+    border-radius: 30px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+    background: white;
+    color: var(--navy);
+  }
+  .search-bar input:focus { border-color: var(--blue); }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey);
+    font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-pill">Care Home Staff</div>
+  <h1>🏥 GP Quick Reference Guide</h1>
+  <p>Aylesbury Surgery · Tap a topic for full guidance</p>
+</header>
+
+<!-- EMERGENCY -->
+<div class="emergency-bar">
+  ⚠️ Life-threatening emergency? Call <strong>999</strong> immediately — do not call the GP first
+</div>
+
+<!-- VITALS BANNER -->
+<div class="section-label">📊 VITAL SIGNS</div>
+<div class="vitals-banner" onclick="openModal('vitals')">
+  <div class="vitals-banner-inner">
+    <div class="vitals-icon">📈</div>
+    <div class="vitals-banner-text">
+      <h2>Normal Vital Signs &amp; When to Worry</h2>
+      <p>Blood pressure · Temperature · Pulse · SpO₂ · Breathing rate</p>
+    </div>
+    <div class="vitals-arrow">›</div>
+  </div>
+  <div class="vitals-strip">
+    <div class="vstrip-item" onclick="event.stopPropagation(); openModal('bp')">
+      <div class="vs-icon">💙</div>
+      <div class="vs-label">BP</div>
+      <div class="vs-val">120/80</div>
+    </div>
+    <div class="vstrip-item" onclick="event.stopPropagation(); openModal('temp')">
+      <div class="vs-icon">🌡️</div>
+      <div class="vs-label">Temp</div>
+      <div class="vs-val">36.5–37.5°C</div>
+    </div>
+    <div class="vstrip-item" onclick="event.stopPropagation(); openModal('pulse')">
+      <div class="vs-icon">❤️</div>
+      <div class="vs-label">Pulse</div>
+      <div class="vs-val">60–100</div>
+    </div>
+    <div class="vstrip-item" onclick="event.stopPropagation(); openModal('spo2')">
+      <div class="vs-icon">💚</div>
+      <div class="vs-label">SpO₂</div>
+      <div class="vs-val">≥95%</div>
+    </div>
+    <div class="vstrip-item" onclick="event.stopPropagation(); openModal('rr')">
+      <div class="vs-icon">🫁</div>
+      <div class="vs-label">Breaths</div>
+      <div class="vs-val">12–20/min</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search topics e.g. urine, swollen legs…" oninput="filterCards()">
+</div>
+
+<!-- CONCERN CARDS -->
+<div class="section-label">🩺 COMMON REASONS TO CALL — TAP FOR GUIDANCE</div>
+<div class="cards-grid" id="cardsGrid">
+
+  <div class="concern-card card-uti" onclick="openModal('uti')" data-tags="uti urine infection waterworks">
+    <div class="cc-icon">🚿</div>
+    <h3>Urine Infection (UTI)</h3>
+    <p>Burning, cloudy urine, frequency, smelly urine</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-conf" onclick="openModal('confusion')" data-tags="confusion delirium confused agitated">
+    <div class="cc-icon">🧠</div>
+    <h3>New Confusion / Delirium</h3>
+    <p>Suddenly muddled, not themselves, agitated</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-legs" onclick="openModal('legs')" data-tags="swollen legs ankles oedema fluid">
+    <div class="cc-icon">🦵</div>
+    <h3>Swollen Legs / Ankles</h3>
+    <p>Puffiness, pitting, one leg or both legs swollen</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-urti" onclick="openModal('urti')" data-tags="cough cold sore throat chest infection">
+    <div class="cc-icon">🤧</div>
+    <h3>Cough / Chest Infection</h3>
+    <p>Cold, sore throat, productive cough, URTI</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-offlegs" onclick="openModal('offlegs')" data-tags="off legs weak mobility fallen wobbly">
+    <div class="cc-icon">🪑</div>
+    <h3>Off Legs / Weakness</h3>
+    <p>Unable to stand, sudden weakness, not walking</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-falls" onclick="openModal('falls')" data-tags="fall fallen floor trip injury head">
+    <div class="cc-icon">⚠️</div>
+    <h3>Fall / After a Fall</h3>
+    <p>Found on floor, trip, head injury, hip pain</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-chest" onclick="openModal('chest')" data-tags="chest pain heart attack breathless shortness">
+    <div class="cc-icon">💔</div>
+    <h3>Chest Pain / Breathlessness</h3>
+    <p>Tight chest, difficulty breathing, fast breathing</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-skin" onclick="openModal('skin')" data-tags="rash skin red sore cellulitis infected wound">
+    <div class="cc-icon">🩹</div>
+    <h3>Skin Rash / Redness / Wound</h3>
+    <p>Infected wound, spreading redness, cellulitis</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-constip" onclick="openModal('constip')" data-tags="constipation no bowels bowels stomach">
+    <div class="cc-icon">🏥</div>
+    <h3>Constipation / No Bowels</h3>
+    <p>No bowel movement, straining, abdominal pain</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-diarrhoea" onclick="openModal('diarrhoea')" data-tags="diarrhoea loose stools vomiting sick stomach bug">
+    <div class="cc-icon">🤢</div>
+    <h3>Diarrhoea / Vomiting</h3>
+    <p>Loose stools, sickness, stomach bug, C. diff</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-pain" onclick="openModal('pain')" data-tags="pain ache hurting analgesia paracetamol">
+    <div class="cc-icon">😣</div>
+    <h3>Pain / Not Controlled</h3>
+    <p>Uncontrolled pain, asking for pain relief</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-diabetes" onclick="openModal('diabetes')" data-tags="blood sugar glucose diabetic hypo high low">
+    <div class="cc-icon">💉</div>
+    <h3>High / Low Blood Sugar</h3>
+    <p>Diabetic patient, sweating, shaking, drowsy</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-mental" onclick="openModal('mental')" data-tags="mental health agitated distressed anxious depression">
+    <div class="cc-icon">💬</div>
+    <h3>Mental Health / Distress</h3>
+    <p>Agitated, refusing care, low mood, self-harm concern</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-eye" onclick="openModal('eye')" data-tags="red eye sore eye discharge conjunctivitis">
+    <div class="cc-icon">👁️</div>
+    <h3>Red / Sore Eye</h3>
+    <p>Sticky eye, discharge, painful red eye</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-wound" onclick="openModal('wound')" data-tags="wound ulcer pressure sore bedsore infected">
+    <div class="cc-icon">🩸</div>
+    <h3>Pressure Sore / Leg Ulcer</h3>
+    <p>Infected ulcer, new pressure sore, wound breakdown</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-dehydration" onclick="openModal('dehydration')" data-tags="dehydrated not drinking fluids dry mouth thirsty">
+    <div class="cc-icon">💧</div>
+    <h3>Not Drinking / Dehydration</h3>
+    <p>Refusing fluids, dry mouth, dark urine, drowsy</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-fit" onclick="openModal('fit')" data-tags="fit seizure convulsion epilepsy shaking">
+    <div class="cc-icon">⚡</div>
+    <h3>Fit / Seizure</h3>
+    <p>Shaking, convulsion, loss of consciousness, epilepsy</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-palliative" onclick="openModal('palliative')" data-tags="end of life dying palliative syringe driver comfort">
+    <div class="cc-icon">🕊️</div>
+    <h3>End of Life / Palliative</h3>
+    <p>Deteriorating, syringe driver, last days of life</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-medication" onclick="openModal('medication')" data-tags="medication tablets prescription repeat drugs">
+    <div class="cc-icon">💊</div>
+    <h3>Medication Query</h3>
+    <p>Run out of tablets, dose question, new prescription</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+  <div class="concern-card card-nose" onclick="openModal('nose')" data-tags="nosebleed epistaxis bleeding nose">
+    <div class="cc-icon">🩺</div>
+    <h3>Nosebleed</h3>
+    <p>Bleeding from the nose, not stopping</p>
+    <span class="cc-arrow">›</span>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  This guide is for care home staff only. Always use clinical judgement. When in doubt — call for advice. <br>
+  Based on NICE, NHS, and ICU/SBAR guidelines. Updated May 2025.
+</div>
+
+<!-- ═══════════════════════════════════════════ MODALS ═════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeAllModals()">
+  <div class="modal" id="modal-content" onclick="event.stopPropagation()">
+    <div id="modal-inner"></div>
+  </div>
+</div>
+
+<script>
+function openModal(id) {
+  document.getElementById('modal-overlay').classList.add('active');
+  document.getElementById('modal-inner').innerHTML = getModalContent(id);
+  document.getElementById('modal-content').scrollTop = 0;
+}
+function closeAllModals() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.concern-card').forEach(c => {
+    const tags = (c.dataset.tags || '') + ' ' + c.innerText.toLowerCase();
+    c.style.display = tags.includes(q) ? '' : 'none';
+  });
+}
+
+function getModalContent(id) {
+  const modals = {
+
+    // ── VITALS OVERVIEW ──
+    vitals: `
+      <div class="modal-header">
+        <div class="mh-icon">📈</div>
+        <h2>Normal Vital Signs & When to Worry</h2>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 immediately if:</h4>
+          <ul>
+            <li>Unable to speak in full sentences due to breathlessness</li>
+            <li>Lips or fingertips turning blue</li>
+            <li>Unresponsive or won't wake up</li>
+            <li>Severe chest pain</li>
+          </ul>
+        </div>
+        <p style="font-size:0.85rem; color:#546e7a; margin-bottom:12px;">Tap any vital sign strip above, or scroll for full detail below.</p>
+        ${getVitalCard('bp')}${getVitalCard('temp')}${getVitalCard('pulse')}${getVitalCard('spo2')}${getVitalCard('rr')}
+      </div>`,
+
+    bp: `<div class="modal-header"><div class="mh-icon">💙</div><h2>Blood Pressure</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div><div class="modal-body">${getVitalCard('bp')}</div>`,
+    temp: `<div class="modal-header"><div class="mh-icon">🌡️</div><h2>Temperature</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div><div class="modal-body">${getVitalCard('temp')}</div>`,
+    pulse: `<div class="modal-header"><div class="mh-icon">❤️</div><h2>Pulse / Heart Rate</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div><div class="modal-body">${getVitalCard('pulse')}</div>`,
+    spo2: `<div class="modal-header"><div class="mh-icon">💚</div><h2>Oxygen Saturation (SpO₂)</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div><div class="modal-body">${getVitalCard('spo2')}</div>`,
+    rr: `<div class="modal-header"><div class="mh-icon">🫁</div><h2>Breathing Rate</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div><div class="modal-body">${getVitalCard('rr')}</div>`,
+
+    // ── UTI ──
+    uti: `
+      <div class="modal-header"><div class="mh-icon">🚿</div><h2>Urine Infection (UTI)</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if any of these:</h4>
+          <ul><li>Shaking/rigors, very high fever (&gt;39°C), confusion, very fast heart rate</li><li>This may be SEPSIS — act fast</li></ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP urgently today if:</h4>
+          <ul>
+            <li>New confusion or sudden change in behaviour</li>
+            <li>High temperature (&gt;38°C) plus urinary symptoms</li>
+            <li>Can't keep fluids down / vomiting</li>
+            <li>Visible blood in urine</li>
+            <li>Catheterised patient with new fever or bypassing</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-green">
+          <h4>✅ Routine call / send urine sample if:</h4>
+          <ul>
+            <li>Burning or stinging when passing urine</li>
+            <li>Needing to pass urine more often than usual</li>
+            <li>Urine smells unusual or looks cloudy</li>
+            <li>No fever, no confusion, resident is otherwise well</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Resident's name, age and current medications</li>
+            <li>Symptoms and how long they've been present</li>
+            <li>Current temperature, urine appearance</li>
+            <li>Whether they have a catheter</li>
+            <li>Any recent urine infections or antibiotics</li>
+            <li>Whether a urine dip or sample has been sent</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💧 What you can do first</h4>
+          <ul>
+            <li>Encourage fluids — offer a glass of water every hour if able</li>
+            <li>Collect a clean catch urine sample or catheter sample</li>
+            <li>Dip urine if you have the strips and record result</li>
+            <li>Check and record temperature, pulse, and breathing rate</li>
+            <li>Note any recent antibiotic use</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/urinary-tract-infections-utis/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS guide to UTIs — symptoms, causes, treatment
+        </a>
+      </div>`,
+
+    // ── CONFUSION ──
+    confusion: `
+      <div class="modal-header"><div class="mh-icon">🧠</div><h2>New Confusion / Delirium</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>Sudden onset with stroke symptoms (face drooping, arm weakness, speech problems)</li>
+            <li>Very drowsy or unresponsive</li>
+            <li>Seizure with confusion</li>
+            <li>High fever with severe confusion (possible sepsis)</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP urgently if:</h4>
+          <ul>
+            <li>New confusion that is not normal for this resident</li>
+            <li>Confusion with high temperature or signs of infection</li>
+            <li>Cannot recognise family, very distressed or unsafe</li>
+            <li>Confusion with fall or injury</li>
+            <li>Confusion in someone taking blood thinners (warfarin, rivaroxaban)</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP (SBAR)</h4>
+          <ul>
+            <li><strong>S – Situation:</strong> "Mr X is confused and not his usual self"</li>
+            <li><strong>B – Background:</strong> Usual cognitive state, dementia diagnosis, current meds</li>
+            <li><strong>A – Assessment:</strong> Temperature, pulse, SpO₂, urine colour, bowels</li>
+            <li><strong>R – Request:</strong> "Could we have a same-day assessment?"</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🔍 Common causes to check first</h4>
+          <ul>
+            <li>Urine infection — collect sample, dip urine</li>
+            <li>Constipation — check last bowel movement</li>
+            <li>Dehydration — when did they last drink fluids?</li>
+            <li>Pain — may be unable to communicate pain</li>
+            <li>New medication or dose change</li>
+            <li>Chest infection — check temperature and breathing</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/delirium/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS guide to delirium (acute confusion)
+        </a>
+      </div>`,
+
+    // ── SWOLLEN LEGS ──
+    legs: `
+      <div class="modal-header"><div class="mh-icon">🦵</div><h2>Swollen Legs / Ankles</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 immediately if:</h4>
+          <ul>
+            <li>Sudden severe breathlessness alongside leg swelling — possible PE (clot on the lung)</li>
+            <li>Chest pain with swollen legs</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>ONE leg swollen, red, warm and painful — may be DVT (blood clot)</li>
+            <li>New or sudden worsening of swelling in both legs</li>
+            <li>Skin breaking down or leaking clear fluid</li>
+            <li>Red, hot, painful skin over the swollen area (cellulitis)</li>
+            <li>Swelling with breathlessness on exertion or lying flat</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-green">
+          <h4>✅ Routine — book appointment if:</h4>
+          <ul>
+            <li>Longstanding mild swelling, no change, resident is well</li>
+            <li>Pitting oedema that is stable and expected</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Is it one leg or both legs?</li>
+            <li>How long has it been swollen — new or longstanding?</li>
+            <li>Is it red, hot or painful?</li>
+            <li>Is the skin breaking down?</li>
+            <li>Current medications (especially diuretics like furosemide)</li>
+            <li>Breathing: any breathlessness?</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/swollen-ankles-feet-and-legs/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Swollen ankles, feet and legs — causes and when to get help
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/deep-vein-thrombosis-dvt/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Deep Vein Thrombosis (DVT) — symptoms and images
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/cellulitis/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Cellulitis — what it looks like, when it's serious
+        </a>
+      </div>`,
+
+    // ── URTI ──
+    urti: `
+      <div class="modal-header"><div class="mh-icon">🤧</div><h2>Cough / Chest Infection / Cold</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>Can't speak full sentences due to breathlessness</li>
+            <li>Lips or fingernails turning blue</li>
+            <li>Breathing rate &gt;30 per minute</li>
+            <li>SpO₂ below 92% (or below 88% in known COPD)</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP urgently if:</h4>
+          <ul>
+            <li>Temperature &gt;38°C plus fast breathing or fast pulse</li>
+            <li>SpO₂ dropped more than 3% from normal baseline</li>
+            <li>Coughing up blood or brown/green sputum</li>
+            <li>Confusion alongside respiratory symptoms</li>
+            <li>Resident with COPD, heart failure, or very frail</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to record and tell the GP</h4>
+          <ul>
+            <li>Temperature, pulse, breathing rate, SpO₂</li>
+            <li>Colour of sputum (phlegm) if any</li>
+            <li>How long they've been unwell</li>
+            <li>Relevant history: COPD, asthma, heart failure, immunosuppressed</li>
+            <li>Any antibiotics taken recently</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/chest-infection/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Chest infection — symptoms and when to seek help
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/living-with/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: COPD exacerbations — managing flare-ups
+        </a>
+      </div>`,
+
+    // ── OFF LEGS ──
+    offlegs: `
+      <div class="modal-header"><div class="mh-icon">🪑</div><h2>Off Legs / Sudden Weakness</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 immediately if:</h4>
+          <ul>
+            <li>Sudden weakness or paralysis of one side (face, arm, leg)</li>
+            <li>Sudden difficulty speaking or understanding</li>
+            <li>Sudden severe headache with weakness — possible stroke</li>
+            <li>Use the FAST test: Face drooping, Arm weakness, Speech problems, Time to call 999</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP urgently if:</h4>
+          <ul>
+            <li>Sudden deterioration in mobility — not walking when they normally can</li>
+            <li>Off legs with signs of infection (fever, confusion)</li>
+            <li>Off legs after a fall — possible hip fracture</li>
+            <li>Unable to weight bear at all</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Was the onset sudden or gradual?</li>
+            <li>Can they weight bear at all?</li>
+            <li>Have they fallen?</li>
+            <li>Any pain — especially hip or groin?</li>
+            <li>Temperature, pulse, SpO₂</li>
+            <li>Usual level of mobility and any recent change</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/stroke/symptoms/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: FAST stroke symptoms — face, arm, speech, time
+        </a>
+      </div>`,
+
+    // ── FALLS ──
+    falls: `
+      <div class="modal-header"><div class="mh-icon">⚠️</div><h2>Fall / After a Fall</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 immediately if:</h4>
+          <ul>
+            <li>Head injury with: loss of consciousness, vomiting, confusion, unequal pupils, or on blood thinners (warfarin, rivaroxaban, apixaban, etc.)</li>
+            <li>Unable to move limb — possible fracture</li>
+            <li>Severe hip or groin pain after fall — possible hip fracture</li>
+            <li>Unconscious or unresponsive after fall</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP urgently if:</h4>
+          <ul>
+            <li>Head bump — even minor — if on anticoagulants (blood thinners)</li>
+            <li>Bruising, swelling or deformity of a limb</li>
+            <li>Unable to weight bear</li>
+            <li>Repeated falls today or this week</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Were they witnessed falling? If not, how long were they on the floor?</li>
+            <li>Did they hit their head?</li>
+            <li>Are they on blood thinners? (warfarin, rivaroxaban, apixaban, edoxaban, clopidogrel)</li>
+            <li>Any visible injuries?</li>
+            <li>Observations: pulse, BP, temperature</li>
+            <li>Usual mobility and any change beforehand</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🛑 Do not move if:</h4>
+          <ul>
+            <li>You suspect a hip fracture or spinal injury</li>
+            <li>Call 999 and keep the resident still, warm and reassured</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/falls/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Falls in older people — prevention and treatment
+        </a>
+      </div>`,
+
+    // ── CHEST PAIN ──
+    chest: `
+      <div class="modal-header"><div class="mh-icon">💔</div><h2>Chest Pain / Breathlessness</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 immediately — do NOT call GP first:</h4>
+          <ul>
+            <li>Any new chest pain — tight, crushing, squeezing, or heavy</li>
+            <li>Chest pain spreading to arm, neck or jaw</li>
+            <li>Sudden severe breathlessness</li>
+            <li>Pale, sweaty, cold and clammy</li>
+            <li>Collapse</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-blue">
+          <h4>ℹ️ While waiting for 999:</h4>
+          <ul>
+            <li>Sit them up in a comfortable position</li>
+            <li>Do not leave them alone</li>
+            <li>If they have GTN spray and have used it before, allow them to use it</li>
+            <li>Record observations every 5 minutes</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/heart-attack/symptoms/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Heart attack symptoms — what to look for
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/pulmonary-embolism/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Pulmonary embolism (clot on lung) symptoms
+        </a>
+      </div>`,
+
+    // ── SKIN ──
+    skin: `
+      <div class="modal-header"><div class="mh-icon">🩹</div><h2>Skin Rash / Redness / Wound</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>Non-blanching purple/red rash (does not fade when pressed with a glass) — possible meningitis</li>
+            <li>Rapidly spreading redness with fever and confusion — possible sepsis</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>Red, hot, painful skin spreading — cellulitis</li>
+            <li>Infected wound with pus, smell, or red tracking lines</li>
+            <li>New rash with fever</li>
+            <li>Suspected shingles — painful one-sided blistering rash</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📱 Helpful: photograph the rash</h4>
+          <ul>
+            <li>Take a clear photograph in good light</li>
+            <li>This helps the GP assess remotely if needed</li>
+            <li>Note when it started, any spread, and whether it is painful</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/cellulitis/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Cellulitis — photos, symptoms, and treatment
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/shingles/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Shingles — what the rash looks like
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/meningitis/symptoms/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Meningitis rash check — glass test explained
+        </a>
+      </div>`,
+
+    // ── CONSTIPATION ──
+    constip: `
+      <div class="modal-header"><div class="mh-icon">🏥</div><h2>Constipation / No Bowels</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 / GP urgently if:</h4>
+          <ul>
+            <li>Severe abdominal pain and vomiting — possible obstruction</li>
+            <li>Abdomen is very distended (bloated and hard)</li>
+            <li>No bowels in over 5 days with pain and distress</li>
+            <li>Blood from the back passage</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>No bowels for 3+ days on regular laxatives</li>
+            <li>Resident is confused and constipation may be the cause</li>
+            <li>Faecal impaction suspected (leaking liquid around blockage)</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Date of last bowel movement</li>
+            <li>What laxatives are prescribed and whether they've been given</li>
+            <li>Any abdominal pain or distension</li>
+            <li>Fluid and food intake</li>
+            <li>Any recent medication changes (opioids cause constipation)</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/constipation/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Constipation — causes, treatment and when to get help
+        </a>
+      </div>`,
+
+    // ── DIARRHOEA ──
+    diarrhoea: `
+      <div class="modal-header"><div class="mh-icon">🤢</div><h2>Diarrhoea / Vomiting</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Infection control — act immediately:</h4>
+          <ul>
+            <li>If more than 2 residents have diarrhoea and/or vomiting, this may be a norovirus outbreak</li>
+            <li>Inform your manager and follow your outbreak protocol</li>
+            <li>Isolate affected residents, use PPE, enhanced cleaning</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>Bloody diarrhoea</li>
+            <li>High fever with diarrhoea</li>
+            <li>Signs of dehydration — confusion, dry mouth, no urine output</li>
+            <li>Diarrhoea after recent antibiotics — possible C. difficile</li>
+            <li>More than 6 loose stools in 24 hours</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Stool frequency and description (Bristol Stool Chart)</li>
+            <li>Any blood or mucus in stools</li>
+            <li>Any vomiting — how many times?</li>
+            <li>Temperature, fluid intake and urine output</li>
+            <li>Recent antibiotic use</li>
+            <li>How many other residents/staff are affected</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/diarrhoea-and-vomiting/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Diarrhoea and vomiting — causes and treatment
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/c-difficile/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: C. difficile infection — symptoms and risks
+        </a>
+      </div>`,
+
+    // ── PAIN ──
+    pain: `
+      <div class="modal-header"><div class="mh-icon">😣</div><h2>Pain / Not Controlled</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if severe sudden pain:</h4>
+          <ul>
+            <li>Severe chest pain</li>
+            <li>Severe abdominal pain — especially if rigid abdomen</li>
+            <li>Sudden severe headache ("worst headache of life")</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>Pain not controlled despite regular prescribed analgesia</li>
+            <li>New or unexplained pain</li>
+            <li>Pain in palliative or end of life resident</li>
+            <li>Unable to give usual analgesia (vomiting, can't swallow)</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 Describing pain to the GP</h4>
+          <ul>
+            <li>Where is the pain? Does it go anywhere?</li>
+            <li>How severe is it on a scale of 0–10?</li>
+            <li>What type of pain — sharp, dull, burning, cramping?</li>
+            <li>How long has it been there?</li>
+            <li>What analgesia have they had and when?</li>
+            <li>What makes it better or worse?</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💊 Pain relief — what you can give first (if prescribed)</h4>
+          <ul>
+            <li>Paracetamol 1g — check it's on the MAR and when last given</li>
+            <li>Do not double up paracetamol or give more than every 4–6 hours</li>
+            <li>For residents who can't communicate: use a pain assessment tool (PAINAD)</li>
+          </ul>
+        </div>
+      </div>`,
+
+    // ── DIABETES ──
+    diabetes: `
+      <div class="modal-header"><div class="mh-icon">💉</div><h2>High / Low Blood Sugar</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 LOW blood sugar (Hypo) — BM below 4.0 mmol/L:</h4>
+          <ul>
+            <li>Shaking, sweating, pale, confused, aggressive</li>
+            <li>Give 15–20g fast-acting glucose IMMEDIATELY if able to swallow safely: 3–4 glucotabs, 150ml fruit juice or cola (not diet), or 2 teaspoons of sugar</li>
+            <li>Re-check after 15 minutes</li>
+            <li>If unconscious — DO NOT give anything by mouth — call 999</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ HIGH blood sugar — call GP if:</h4>
+          <ul>
+            <li>BM above 20 mmol/L especially with: vomiting, confusion, rapid breathing, fruity breath</li>
+            <li>Unable to take their insulin or tablets</li>
+            <li>BM persistently above 15 mmol/L across several readings</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP</h4>
+          <ul>
+            <li>Current blood sugar reading and recent trend</li>
+            <li>Whether insulin or tablets have been given</li>
+            <li>Are they eating and drinking?</li>
+            <li>Any signs of infection (can raise blood sugar)</li>
+            <li>Current symptoms</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Low blood sugar — symptoms and what to do
+        </a>
+      </div>`,
+
+    // ── MENTAL HEALTH ──
+    mental: `
+      <div class="modal-header"><div class="mh-icon">💬</div><h2>Mental Health / Distress</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>Immediate risk to their life or others</li>
+            <li>Actively harming themselves</li>
+            <li>Expressing intent to end their life with a plan or means</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP / mental health team today if:</h4>
+          <ul>
+            <li>Expressing suicidal thoughts or hopelessness</li>
+            <li>New severe agitation or aggression</li>
+            <li>Refusing all care and food/fluids for 24+ hours</li>
+            <li>New psychotic symptoms (talking to people not there, paranoia)</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💛 What you can do</h4>
+          <ul>
+            <li>Stay calm and non-judgemental — listen</li>
+            <li>Ensure a safe environment</li>
+            <li>Note any trigger events or changes in routine</li>
+            <li>Contact the resident's named key worker</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/behaviours/help-for-suicidal-thoughts/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Help for suicidal thoughts — guidance for carers
+        </a>
+      </div>`,
+
+    // ── EYE ──
+    eye: `
+      <div class="modal-header"><div class="mh-icon">👁️</div><h2>Red / Sore Eye</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 / go to A&E if:</h4>
+          <ul>
+            <li>Sudden loss of vision</li>
+            <li>Severe eye pain with nausea — possible acute glaucoma</li>
+            <li>Chemical splash in the eye</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP / optician today if:</h4>
+          <ul>
+            <li>Red eye with blurred vision or significant pain</li>
+            <li>Corneal injury (scratch or foreign body)</li>
+            <li>New or worsening sticky discharge with pain</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-green">
+          <h4>✅ Routine if:</h4>
+          <ul>
+            <li>Both eyes slightly pink and sticky — likely conjunctivitis</li>
+            <li>Gentle cleaning with cool boiled water and cotton wool</li>
+            <li>Wash hands before and after — conjunctivitis is contagious</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/conjunctivitis/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Conjunctivitis — symptoms and self-care
+        </a>
+      </div>`,
+
+    // ── WOUND / PRESSURE SORE ──
+    wound: `
+      <div class="modal-header"><div class="mh-icon">🩸</div><h2>Pressure Sore / Leg Ulcer</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call GP urgently if:</h4>
+          <ul>
+            <li>Wound is black/necrotic, or has tracking red lines (cellulitis from wound)</li>
+            <li>Fever with infected wound — possible wound sepsis</li>
+            <li>Deeply infected wound in diabetic patient</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today / tissue viability nurse if:</h4>
+          <ul>
+            <li>New pressure sore — grade 2 or above (broken skin)</li>
+            <li>Wound not healing or deteriorating</li>
+            <li>Wound with increasing pain, odour or discharge</li>
+            <li>Leg ulcer becoming larger or more infected</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 What to tell the GP / nurse</h4>
+          <ul>
+            <li>Location of wound / pressure sore</li>
+            <li>Size (measure if possible), depth and appearance</li>
+            <li>Colour, smell and type of discharge</li>
+            <li>When it was first noticed</li>
+            <li>Current dressing in use</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/pressure-sores/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Pressure sores — stages, photos, and treatment
+        </a>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/leg-ulcer/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Leg ulcers — what they look like, treatment
+        </a>
+      </div>`,
+
+    // ── DEHYDRATION ──
+    dehydration: `
+      <div class="modal-header"><div class="mh-icon">💧</div><h2>Not Drinking / Dehydration</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 or GP urgently if:</h4>
+          <ul>
+            <li>Not passed urine in 12+ hours</li>
+            <li>Very confused or difficult to rouse</li>
+            <li>Sunken eyes, very dry mouth, no tears</li>
+            <li>Rapid weak pulse with dehydration</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💧 Signs of dehydration to report</h4>
+          <ul>
+            <li>Dark yellow or brown urine — normal is pale yellow</li>
+            <li>Dry mouth, dry lips</li>
+            <li>Less urine than usual</li>
+            <li>Headache, dizziness, confusion</li>
+            <li>Refusing fluids or unable to swallow safely</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>✅ What you can do</h4>
+          <ul>
+            <li>Offer small sips frequently — try different drinks they enjoy</li>
+            <li>Keep a fluid balance chart if concerned</li>
+            <li>Check for a swallowing problem — thickened fluids if SALT-recommended</li>
+            <li>Tell the GP if oral intake has been poor for more than 24–48 hours</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/dehydration/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Dehydration — signs, symptoms, and treatment
+        </a>
+      </div>`,
+
+    // ── FIT / SEIZURE ──
+    fit: `
+      <div class="modal-header"><div class="mh-icon">⚡</div><h2>Fit / Seizure</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>First ever seizure — resident has never had one before</li>
+            <li>Seizure lasting more than 5 minutes</li>
+            <li>Not recovering to their usual self within 30 minutes</li>
+            <li>Multiple seizures in a short period</li>
+            <li>Injured during the seizure</li>
+            <li>Breathing difficulties after seizure</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🆘 What to do DURING a seizure</h4>
+          <ul>
+            <li>Stay calm and stay with them</li>
+            <li>Clear the area — remove anything they could injure themselves on</li>
+            <li>Cushion their head if on the floor</li>
+            <li>DO NOT restrain them or put anything in their mouth</li>
+            <li>Time the seizure from start</li>
+            <li>Roll onto their side (recovery position) once convulsion stops</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP after seizure if:</h4>
+          <ul>
+            <li>Known epileptic but seizure was different or longer than usual</li>
+            <li>Possible trigger: missed medication, infection, blood sugar problem</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/epilepsy/what-to-do-during-a-seizure/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: What to do during a seizure — step-by-step guide
+        </a>
+      </div>`,
+
+    // ── PALLIATIVE ──
+    palliative: `
+      <div class="modal-header"><div class="mh-icon">🕊️</div><h2>End of Life / Palliative Care</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-blue">
+          <h4>ℹ️ Signs that someone may be in their last hours/days:</h4>
+          <ul>
+            <li>More drowsy, sleeping most of the time</li>
+            <li>Breathing changes — slower, irregular, noisy ('Cheyne-Stokes')</li>
+            <li>Mottled, pale or blotchy skin especially on knees and feet</li>
+            <li>Cold hands and feet</li>
+            <li>Not eating or drinking</li>
+            <li>Reduced or no urine output</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP / out-of-hours palliative if:</h4>
+          <ul>
+            <li>Pain or breathlessness not controlled</li>
+            <li>Agitation or distress not controlled</li>
+            <li>Syringe driver needs review or setting up</li>
+            <li>Uncertain about DNACPR / advance care plan</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💛 Care priorities</h4>
+          <ul>
+            <li>Ensure comfort — mouth care, position, warmth</li>
+            <li>Ensure family is informed and supported</li>
+            <li>Follow the resident's advance care plan and wishes</li>
+            <li>Note the time and document changes carefully</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/end-of-life-care/what-it-involves-and-when-it-starts/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: End of life care — what to expect
+        </a>
+      </div>`,
+
+    // ── MEDICATION ──
+    medication: `
+      <div class="modal-header"><div class="mh-icon">💊</div><h2>Medication Query</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call GP urgently if:</h4>
+          <ul>
+            <li>Resident has been given wrong medication or dose</li>
+            <li>Suspected medication overdose</li>
+            <li>Allergic reaction after new medication</li>
+          </ul>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>Critical medications run out (insulin, anti-epileptics, anticoagulants, Parkinson's meds)</li>
+            <li>Resident unable to take tablets due to swallowing difficulty</li>
+            <li>New symptom that may be a drug side effect</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>📋 For routine prescription requests</h4>
+          <ul>
+            <li>Submit repeat prescription requests at least 48–72 hours before running out</li>
+            <li>Use the surgery's preferred request method (online / fax / email)</li>
+            <li>Do not leave urgent medications to the last minute</li>
+            <li>If you think a medication needs reviewing, note your concerns to pass on</li>
+          </ul>
+        </div>
+      </div>`,
+
+    // ── NOSEBLEED ──
+    nose: `
+      <div class="modal-header"><div class="mh-icon">🩺</div><h2>Nosebleed (Epistaxis)</h2><button class="modal-close" onclick="closeAllModals()">✕</button></div>
+      <div class="modal-body">
+        <div class="alert-box alert-red">
+          <h4>🚨 Call 999 if:</h4>
+          <ul>
+            <li>Very heavy bleeding not stopping after 30 minutes of first aid</li>
+            <li>Blood flowing down throat causing choking</li>
+            <li>Resident on anticoagulants with uncontrolled nosebleed</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🩸 First aid — do this first:</h4>
+          <ol class="step-list">
+            <li>Sit them upright and lean slightly forward (not backwards)</li>
+            <li>Pinch the soft part of the nose — just below the bony bridge</li>
+            <li>Keep pinching continuously for 10–15 minutes without releasing</li>
+            <li>Do NOT tilt the head back — blood can go to the stomach</li>
+            <li>Apply a cold damp cloth to the bridge of the nose</li>
+            <li>If still bleeding after 30 minutes — call 999</li>
+          </ol>
+        </div>
+        <div class="alert-box alert-amber">
+          <h4>⚠️ Call GP today if:</h4>
+          <ul>
+            <li>Stopped but resident is on blood thinners — GP may want to check</li>
+            <li>Recurrent nosebleeds in the same resident</li>
+          </ul>
+        </div>
+        <a class="nhs-link" href="https://www.nhs.uk/conditions/nosebleed/" target="_blank">
+          <span class="nhs-logo">NHS</span> NHS: Nosebleeds — how to stop them and when to seek help
+        </a>
+      </div>`,
+  };
+
+  return modals[id] || '<div class="modal-body"><p>Content not found.</p></div>';
+}
+
+function getVitalCard(v) {
+  const cards = {
+    bp: `
+      <div class="vital-detail-card vdc-bp">
+        <div class="vdc-title">💙 Blood Pressure (BP)</div>
+        <div class="vdc-normal">Normal: 90/60 – 140/90 mmHg</div>
+        <p style="font-size:0.82rem; margin-bottom:8px;">In elderly care home residents, a systolic (top number) of 100–150 is often acceptable. Check against their usual baseline.</p>
+        <table class="vdc-table">
+          <tr><th>Reading</th><th>What it means</th><th>Action</th></tr>
+          <tr><td>&lt;90/60</td><td>Low BP — hypotension</td><td class="tag-concern">Call GP — check for sepsis, bleeding, dehydration</td></tr>
+          <tr><td>90–140 / 60–90</td><td>Normal range</td><td>Continue monitoring</td></tr>
+          <tr><td>140–180 / 90–110</td><td>Mildly elevated</td><td>Inform GP if new or symptomatic</td></tr>
+          <tr><td>&gt;180/110</td><td>Hypertensive — severely high</td><td class="tag-concern">Call GP urgently — especially with headache or confusion</td></tr>
+          <tr><td>&gt;200/120 + symptoms</td><td>Hypertensive crisis</td><td class="tag-call999">Call 999</td></tr>
+        </table>
+      </div>`,
+    temp: `
+      <div class="vital-detail-card vdc-temp">
+        <div class="vdc-title">🌡️ Temperature</div>
+        <div class="vdc-normal">Normal: 36.1°C – 37.2°C</div>
+        <p style="font-size:0.82rem; margin-bottom:8px;">Elderly residents may run a lower baseline. A temperature of 37.8°C+ may represent significant fever in this group.</p>
+        <table class="vdc-table">
+          <tr><th>Reading</th><th>What it means</th><th>Action</th></tr>
+          <tr><td>&lt;35°C</td><td>Hypothermia</td><td class="tag-call999">Call 999 — wrap warmly, do not rub limbs</td></tr>
+          <tr><td>35–36°C</td><td>Low — cool</td><td class="tag-concern">Warm the resident, inform GP if persists</td></tr>
+          <tr><td>36.1–37.2°C</td><td>Normal</td><td>Continue monitoring</td></tr>
+          <tr><td>37.3–38°C</td><td>Low-grade fever</td><td>Monitor, encourage fluids, check for infection</td></tr>
+          <tr><td>38–39°C</td><td>Fever</td><td class="tag-concern">Call GP — look for infection source</td></tr>
+          <tr><td>&gt;39°C</td><td>High fever</td><td class="tag-call999">Call GP urgently — screen for sepsis</td></tr>
+        </table>
+      </div>`,
+    pulse: `
+      <div class="vital-detail-card vdc-pulse">
+        <div class="vdc-title">❤️ Pulse / Heart Rate</div>
+        <div class="vdc-normal">Normal: 60–100 beats per minute (bpm)</div>
+        <p style="font-size:0.82rem; margin-bottom:8px;">Also note if the pulse is regular or irregular — note if it is irregular.</p>
+        <table class="vdc-table">
+          <tr><th>Reading</th><th>What it means</th><th>Action</th></tr>
+          <tr><td>&lt;40 bpm</td><td>Very slow — bradycardia</td><td class="tag-call999">Call 999 if symptomatic (dizzy, collapse)</td></tr>
+          <tr><td>40–59 bpm</td><td>Slow</td><td class="tag-concern">Call GP if new or symptomatic</td></tr>
+          <tr><td>60–100 bpm</td><td>Normal</td><td>Continue monitoring</td></tr>
+          <tr><td>101–120 bpm</td><td>Mildly fast — tachycardia</td><td class="tag-concern">Look for cause (pain, fever, infection), inform GP</td></tr>
+          <tr><td>&gt;120 bpm</td><td>Fast — significant tachycardia</td><td class="tag-call999">Call GP urgently — may need 999</td></tr>
+          <tr><td>Irregular</td><td>Possible atrial fibrillation (AF)</td><td class="tag-concern">Inform GP — document carefully</td></tr>
+        </table>
+      </div>`,
+    spo2: `
+      <div class="vital-detail-card vdc-spo2">
+        <div class="vdc-title">💚 Oxygen Saturation (SpO₂)</div>
+        <div class="vdc-normal">Normal: 95–100% (or 88–92% in COPD — check care plan)</div>
+        <p style="font-size:0.82rem; margin-bottom:8px;">Always check the resident's individual target range — COPD patients have lower targets. Ensure probe is on a warm, well-perfused finger.</p>
+        <table class="vdc-table">
+          <tr><th>Reading</th><th>What it means</th><th>Action</th></tr>
+          <tr><td>&lt;88%</td><td>Critically low</td><td class="tag-call999">Call 999 — apply supplemental oxygen if available</td></tr>
+          <tr><td>88–92%</td><td>Low — acceptable only if COPD target</td><td class="tag-concern">Call GP urgently if not known COPD target</td></tr>
+          <tr><td>92–94%</td><td>Borderline</td><td class="tag-concern">Call GP — check for respiratory cause</td></tr>
+          <tr><td>95–100%</td><td>Normal</td><td>Continue monitoring</td></tr>
+          <tr><td>Drop &gt;3% from baseline</td><td>Significant change</td><td class="tag-concern">Call GP regardless of absolute number</td></tr>
+        </table>
+      </div>`,
+    rr: `
+      <div class="vital-detail-card vdc-rr">
+        <div class="vdc-title">🫁 Breathing Rate (Respiratory Rate)</div>
+        <div class="vdc-normal">Normal: 12–20 breaths per minute</div>
+        <p style="font-size:0.82rem; margin-bottom:8px;">Count breaths for a full 60 seconds — do not tell the resident you are counting (they will change their breathing). This is one of the most important early warning signs.</p>
+        <table class="vdc-table">
+          <tr><th>Reading</th><th>What it means</th><th>Action</th></tr>
+          <tr><td>&lt;8/min</td><td>Very slow — possible opioid toxicity</td><td class="tag-call999">Call 999 immediately</td></tr>
+          <tr><td>8–11/min</td><td>Slow</td><td class="tag-concern">Call GP urgently</td></tr>
+          <tr><td>12–20/min</td><td>Normal</td><td>Continue monitoring</td></tr>
+          <tr><td>21–25/min</td><td>Mildly elevated</td><td class="tag-concern">Inform GP — look for cause (fever, pain, anxiety)</td></tr>
+          <tr><td>&gt;25/min</td><td>Significantly fast</td><td class="tag-call999">Call GP urgently — consider 999</td></tr>
+          <tr><td>&gt;30/min</td><td>Critically fast</td><td class="tag-call999">Call 999</td></tr>
+        </table>
+      </div>`,
+  };
+  return cards[v] || '';
+}
+</script>
+</body>
+</html>
